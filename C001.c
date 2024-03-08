@@ -18,10 +18,23 @@ int main(){
         pStar(1);
         blank1++;
         blank2-= 2;
-        printf("\n");
+        printf("\n\n");
     }
+    stars = size * 2;
+    for(i = 0; i < size; i++){
+      pStar(stars);
+      printf("\n\n");
+    }
+  blank1 = 0;
+for(i = 0; i < size; i++){
+      pBlank(blank1);
+      pStar(stars);
+      printf("\n\n");
 
-
+      stars -= 2;
+      blank1++;
+    }
+  pStar(size*2);
     return 0;
 }
 
