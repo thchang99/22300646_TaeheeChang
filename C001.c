@@ -35,6 +35,7 @@ for(i = 0; i < size; i++){
       blank1++;
     }
   pStar(size*2);
+  printf("\n");
     return 0;
 }
 
