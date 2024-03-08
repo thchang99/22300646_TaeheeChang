@@ -9,13 +9,16 @@ int main(){
     int i, j;
 
     scanf("%d", &size);
-
-    stars = 2;
-    blanks = (size-1)*2;
+    blank1 = 0;
+    blank2 = (size-1)*2;
     for(i = 0; i < size; i++){
+        pBlank(blank1);
         pStar(1);
-        
+        pBlank(blank2);
         pStar(1);
+        blank1++;
+        blank2-= 2;
+        printf("\n");
     }
 
 
@@ -23,13 +26,13 @@ int main(){
 }
 
 void pStar(int rep){
-    for (int i  = 0; i < rep, i++){
+    for (int i  = 0; i < rep; i++){
       printf("*");
     }
 }
 
 void pBlank(int rep){
-    for (int i  = 0; i < rep, i++){
+    for (int i  = 0; i < rep; i++){
       printf(" ");
     }
 }
