@@ -107,4 +107,6 @@ Temporary Items
 .history
 .ionide
 
+## C executables
+*.ce
 # End of https://www.toptal.com/developers/gitignore/api/c,macos,visualstudiocode
