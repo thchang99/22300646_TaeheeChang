@@ -37,8 +37,8 @@ int main(void) {
 	int myclass[10]; // My classes (max. 10 classes of code)
 	int mycount = 0; // Amount of my classes
 
-	srand(time(0));
-	int count = loadData(classes);
+	srand(time(0)); //sets random seed
+	int count = loadData(classes); //initial count of classes from loading the file
 	printf("> Load %d classes.\n", count);
 
 	while(1){
@@ -46,6 +46,7 @@ int main(void) {
 		printf(">> Menu? > ");
 		scanf("%d", &no);
 
+		//logic that selects between classes based on user input, could've been clearer if switch had been used
 		if(no == 1){ 
 			printf("> 1.Class list (%d classes)\n", count);
 			printAllClasses(classes, count);
@@ -91,7 +92,7 @@ int loadData(struct st_class* c[]){
 	FILE* file;
 
 	file=fopen("classes.txt", "r");
-	while(!feof(file)){
+	while(!feof(file)){ //this creates memory space per classes that were read on the classes.txt file
 		c[count] = (struct st_class*)malloc(sizeof(struct st_class));
 		int r = fscanf(file, "%d %s %d %d", &(c[count]->code),c[count]->name, &(c[count]->unit), &(c[count]->grading));
 		if(r < 4) break;
@@ -102,13 +103,13 @@ int loadData(struct st_class* c[]){
 }
 
 void printAllClasses(struct st_class* c[], int csize){
-	for(int i=0; i<csize; i++){
+	for(int i=0; i<csize; i++){  //goes through every class data and outputs it on the console
 		printf("[%d] %s [credit %d - %s]\n",c[i]->code, c[i]->name, c[i]->unit, kname[c[i]->grading-1]);
 	}
 }
 
 void saveAllClasses(struct st_class* c[], int csize){
-	FILE* file;
+	FILE* file; //this saves the classes in the format that it is read 
 	file = fopen("classes.txt", "w");
 	for(int i=0; i<csize; i++){
 		fprintf(file, "%d %s %d %d\n",c[i]->code, c[i]->name, c[i]->unit, c[i]->grading);
@@ -118,7 +119,7 @@ void saveAllClasses(struct st_class* c[], int csize){
 
 void findClasses(char* name, struct st_class* c[], int csize){
 	int count = 0;
-
+	//this function uses strstr to go through every name and match it 
 	printf("Searching (keyword : %s)\n", name);
 	for(int i=0; i<csize; i++){
 		if(strstr(c[i]->name, name)){
@@ -133,18 +134,23 @@ void findClasses(char* name, struct st_class* c[], int csize){
 int addNewClass(struct st_class* c[], int csize){
 // Caution : Don't allow the duplicate class code.
 // You must complete this function.
-
+	int dup = 0; 
 	struct st_class* p = (struct st_class*)malloc(sizeof(struct st_class));
 
+
+	do{
+	dup = 0;
 	printf(">> code number > ");
 	scanf("%d", &(p->code));
     /** Need to dissallow duplicates in class code*/
     for(int i  = 0; i  < csize; i++){
         if(p->code == c[i]->code){
-            printf("\n*duplicate code*\n-exiting to menu-\n");
-            return csize;
+            printf(">> Code duplicated! Retry.\n");
+			dup = 1;
+			break;
         }
     }
+	} while (dup == 1); //these lines of code modify the data pointed
 	printf(">> class name > ");
 	scanf("%s", p->name);
 	printf(">> credits > ");
@@ -201,25 +207,81 @@ void editClass(struct st_class* c[], int csize){
 // You must make all these functions.
 
 int applyMyClasses(int my[], int msize, struct st_class* c[], int csize){
-
+	int addsize = 0;
+	int rep = 1; 
+	int findcode = 0;
+	int code; //class code
     /*1. get class code and add it in to myclass array
-        1.1 */
+        1.1 ask to enter class code
+		1.2 find class with code
+		1.3 add code to my list
+		1.3 ask if i want to add more classes
+	2.	return amount of classees added*/
 
+	while(rep == 1){
+		findcode = 0;
+		printf(">> Enter a class code > ");
+		scanf("%d", &code);
+		for(int i = 0; i < csize; i++){
+			if(c[i]->code == code){
+				printf("[%d] %s [credit %d - %s]\n",c[i]->code, c[i]->name, c[i]->unit, kname[c[i]->grading-1]);
+				findcode = 1;
+				my[msize++] = code;
+				addsize++;
+				break;
+			}
+		}
+		if (findcode == 0){
+			printf(">> Could not find matching class code\n");
+		}
+		printf(">> Add more?(1:yes 2:no) > ");
+		scanf("%d", &rep);
+
+	}
+	return msize;
 
 	
 	return 0;
 }
 
 void printMyClasses(int my[], int msize, struct st_class* c[], int csize){
-
+	int cred = 0;
+	/* 1. print the classes that I applied to in order
+		1.1 go through my class code list 1 by 1
+		1.2 show class information
+		1.3 add credits to find total
+		2 show credits
+		*/
+	for(int k = 0; k < msize; k++){
+		for(int i = 0; i < csize; i++){
+			if(c[i]->code == my[k]){
+				printf("%d. [%d] %s [credit %d - %s]\n",k + 1, c[i]->code, c[i]->name, c[i]->unit, kname[c[i]->grading-1]);
+				cred += c[i]->unit;
+			}
+		}
+	}
+	printf("All : %d credits", cred);
 
 	
 
 }
 
 void saveMyClass(int my[], int msize, struct st_class* c[], int csize){
-
-
+	//1. print the classes applied in order with stats, same as printMyClass except onto a txt file
+	FILE *f;
+	int cred = 0; 
+	f = fopen("my_classes.txt", "w");
+	fprintf(f, "My Classes\n");
+	for(int k = 0; k < msize; k++){
+		for(int i = 0; i < csize; i++){
+			if(c[i]->code == my[k]){
+				fprintf(f, "%d. [%d] %s [credit %d - %s]\n",k + 1, c[i]->code, c[i]->name, c[i]->unit, kname[c[i]->grading-1]);
+				cred += c[i]->unit;
+			}
+		}
+	}
+	fprintf(f, "All : %d classes, %d credits ", msize, cred);
+	fclose(f);
 
 	
 }
