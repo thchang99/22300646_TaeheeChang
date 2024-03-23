@@ -185,6 +185,7 @@ void searchChannel(struct st_channel* c[], int size){
 	int choose;
     int min, max;
     int count = 0;
+    char name[20];
     printf("> Search Channels\n");
 	printf("> Choose one (1:by peoples 2:by names) > ");
     scanf("%d", &choose);
@@ -202,7 +203,21 @@ void searchChannel(struct st_channel* c[], int size){
         printf("> %d channels are found.", count);
 
     }
-   
+
+   if(choose == 2){
+        printf("> Enter a name >");
+        scanf("%s", name);
+        for(int i = 0; i < size; i++){
+            if(strstr(c[i]->name, name))
+            {
+                printf("[%2d] %-20s %10d peoples [%s] \n",i+1, c[i]->name, c[i]->count,LNAME[c[i]->level]);
+                count++;
+            }
+        }
+    
+        printf("> %d channels are found.\n", count);
+
+    }
 
 
 
