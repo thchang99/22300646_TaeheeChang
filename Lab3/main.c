@@ -250,8 +250,16 @@ void updateChannel(struct st_channel* c[], int size){
 
 int deleteChannel(struct st_channel* c[], int size){
 	int no, yesno;
+    int number;
 	printf("> Delete a new Channel\n");
 	printf("> Enter a number of channel > ");
+    if(number < 1 || number > size){
+        printf("> Wrong Number.\n");
+        return;
+    }
+    number --;
+    printf("> Channel Info.\n");
+    printf("[%2d] %-20s %10d peoples [%s] \n",number+1, c[number]->name, c[number]->count,LNAME[c[number]->level]);
 
 	return size;
 }
