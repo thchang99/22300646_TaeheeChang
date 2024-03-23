@@ -249,23 +249,36 @@ void updateChannel(struct st_channel* c[], int size){
 }
 
 int deleteChannel(struct st_channel* c[], int size){
-	int no, yesno;
+	int yesno;
     int number;
 	printf("> Delete a new Channel\n");
 	printf("> Enter a number of channel > ");
+    scanf("%d", &number);
     if(number < 1 || number > size){
         printf("> Wrong Number.\n");
-        return;
+        return size;
     }
     number --;
     printf("> Channel Info.\n");
     printf("[%2d] %-20s %10d peoples [%s] \n",number+1, c[number]->name, c[number]->count,LNAME[c[number]->level]);
-
+    printf("> Do you want to delete the channel? (1:Yes 0:No)");
+    scanf("%d", &yesno);
+    if(yesno){
+        for(int i = number; i < size; i++){
+            c[i] = c[i+1];
+        }
+        free(c[size-1]);
+        size--;
+        printf("Channel is deleted\n");
+    }
+    else{
+        printf("Canceled");
+    }
 	return size;
 }
 
 
 void makeReport(struct st_channel* c[], int size){
-
+    
 
 }
