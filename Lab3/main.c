@@ -279,6 +279,43 @@ int deleteChannel(struct st_channel* c[], int size){
 
 
 void makeReport(struct st_channel* c[], int size){
+    FILE* report;
+    FILE* save;
+    int count = 0;
+    float average;
+    int sum = 0;
+    int top = -1;
+
+    save = fopen("channels.txt", "w");
+    report = fopen("report.txt", "w");
+    for(int i = 0; i < size; i++){
+        fprintf(save, "%s %d\n", c[i]->name, c[i]->count);
+    }
+    fclose(save);
+    fprintf(report, "Channel List\n");
+    for(int i = 0; i < size; i++){
+        fprintf(report, "[%2d] %-20s %10d peoples [%s] \n",i+1, c[i]->name, c[i]->count,LNAME[c[i]->level]);
+    }
+    fprintf(report, "\nStatistics of Channels\n" );
     
+    for (int i = 0; i < 5 ; i++){
+        for(int j = 0; j < size; j++){
+            if(c[j]->level == i){
+                if (top == -1){
+                    top = j;
+                }
+                count++;
+                sum += c[j]->count;
+                if(c[j]->count > c[top]->count){
+                    top = j;
+                }
+
+            }
+        }
+        fprintf(report, "%s :  %d channels, Average %.1f peoples, Top channel : %s (%d peoples)\n", LNAME[i], count, sum/(float)count, c[top]->name, c[top]->count);
+
+    }
+
+    printf("All information of channels are saved into channels.txt. \n> Channel Statistics are saved into report.txt.\n");
 
 }
