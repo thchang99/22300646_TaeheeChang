@@ -225,13 +225,22 @@ void searchChannel(struct st_channel* c[], int size){
 
 void updateChannel(struct st_channel* c[], int size){
     int number;
+    int name[20];
+    int count;
 	printf("> Modify a new Channel\n");
 	printf("> Enter a number of channel > ");
     scanf("%d", &number);
     if(number < 1 || number > size){
-        printf("> Wrong Number.");
+        printf("> Wrong Number.\n");
         return;
     }
+    number --;
+    printf("> Channel Info.\n")
+    printf("[%2d] %-20s %10d peoples [%s] \n",number+1, c[number]->name, c[number]->count,LNAME[c[number]->level]);
+    printf("> Enter a new name of channel > ");
+    scanf("%s", name);
+    printf("> Enter a new amount of peoples > ");
+    scanf("%d", count);
 
 }
 
