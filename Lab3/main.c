@@ -121,8 +121,31 @@ int addChannel(struct st_channel* c[], int size){
 
 void printStatistics(struct st_channel* c[], int size){
 	printf("> Statistics of Channels\n");
+   /* print statistics of channels of each level
+    1. use for loop to go through 5 levels
+    1.1 for each level the count, average number of subs, and top channel needs to be identified
+    1.2 output those channesl*/
+    int count = 0;
+    float average;
+    int sum = 0;
+    int top = -1;
+    for (int i = 0; i < 5 ; i++){
+        for(int j = 0; j < size; j++){
+            if(c[j]->level == i){
+                if (top == -1){
+                    top = j;
+                }
+                count++;
+                sum += c[j]->count;
+                if(c[j]->count > c[top]->count){
+                    top = j;
+                }
 
+            }
+        }
+        printf("%s :  %d channels, Average %.1f peoples, Top channel : %s (%d peoples)\n", LNAME[i], count, sum/(float)count, c[top]->name, c[top]->count);
 
+    }
 
 
 }
