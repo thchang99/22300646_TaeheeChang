@@ -269,10 +269,10 @@ int deleteChannel(struct st_channel* c[], int size){
         }
         free(c[size-1]);
         size--;
-        printf("Channel is deleted\n");
+        printf("> Channel is deleted\n");
     }
     else{
-        printf("Canceled");
+        printf("> Canceled");
     }
 	return size;
 }
@@ -316,6 +316,6 @@ void makeReport(struct st_channel* c[], int size){
 
     }
 
-    printf("All information of channels are saved into channels.txt. \n> Channel Statistics are saved into report.txt.\n");
+    printf("> All information of channels are saved into channels.txt. \n> Channel Statistics are saved into report.txt.\n");
 
 }
