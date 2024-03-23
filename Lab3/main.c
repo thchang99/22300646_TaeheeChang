@@ -151,10 +151,29 @@ void printStatistics(struct st_channel* c[], int size){
 }
 
 void pickupRandomChannels(struct st_channel* c[], int size){
+    //picking up certain amount of random channels
+    //while loop that runs until certian size is reached
+    // 1. while loop  
+    // 1.1 randomness that selects some
+    int selected[size];
+    int count = 0;
+    int req;
+    int rando;
+    for(int i = 0; i < size;i++){
+        selected[i] = 0;
+    }
+
 	printf("> Pick up Channels\n");
 	printf("> How much channels you want to pick up? > ");
-
-
+    scanf("%d", &req);
+    do{
+        rando = rand()%size;
+        if(selected[rando] == 0){
+            count++;
+            selected[rando] = 1;
+            printf("[%2d] %-20s %10d peoples [%s] \n",rando+1, c[rando]->name, c[rando]->count,LNAME[c[rando]->level]);
+        }
+    }while(count < req);
 
 
 }
