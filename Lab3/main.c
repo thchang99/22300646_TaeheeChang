@@ -224,9 +224,14 @@ void searchChannel(struct st_channel* c[], int size){
 }
 
 void updateChannel(struct st_channel* c[], int size){
+    int number;
 	printf("> Modify a new Channel\n");
 	printf("> Enter a number of channel > ");
-
+    scanf("%d", &number);
+    if(number < 1 || number > size){
+        printf("> Wrong Number.");
+        return;
+    }
 
 }
 
