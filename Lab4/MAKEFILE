@@ -1,12 +1,12 @@
 CC = gcc
-SRC = main.c classes.c
+SRC = main.c class.c
 OBJ = $(SRC:.c=.o)
 EXEC = main
 
 $(EXEC): $(OBJ)
 	$(CC) -o $@ $^
 
-%.o: %.c %.h
+%.o: %.c student.h
 	$(CC) -c $<
 
 clean:
