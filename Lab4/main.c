@@ -1,25 +1,5 @@
-#include <stdio.h>
 
-#define SIZE 50
-
-typedef struct{
-    char name[20];
-    char id[20];
-    char phone[20];
-    int seats[SIZE];
-    int paid;
-
-}student;
-
-int loadfile(student *p); //returns size read;
-int menu(int option);
-int newStudent(student *p, int size);
-void viewStudent(student *p, int size);
-void updateStudent(student *p, int size);
-int deleteStudent(student *p, int size);
-void searchStudent(student *p, int size);
-void save(student *p, int size);
-
+#include "main.h"
 /*4. 프로그램 시작 시, 데이터 파일로부터 읽어들인 내용으로 초기 데이터 목록을 로딩해야 한다.
 5. [필수기능] main() 에서는 무한반복문을 사용하여 다음 메뉴별로 적절한 작업이 수행되어야 한다.
 - Create 기능 – 새로운 데이터셋을 목록에 추가한다.
@@ -38,3 +18,12 @@ int main(){
     return 0;
 }
 
+
+int loadfile(student *p); //returns size read;
+int menu(student *p);
+int newStudent(student *p, int size);
+void viewStudent(student *p, int size);
+void updateStudent(student *p, int size);
+int deleteStudent(student *p, int size);
+void searchStudent(student *p, int size);
+void save(student *p, int size);
