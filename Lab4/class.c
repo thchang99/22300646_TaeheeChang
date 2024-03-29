@@ -1,6 +1,4 @@
 #include "student.h"
-
-
 char payment[2][20] = {"No", "Yes"};
 
 int loadfile(student *p[]){
@@ -17,7 +15,13 @@ int loadfile(student *p[]){
     return no;
 } //returns size read;
 int menu(student *p[]);
-int newStudent(student *p[], int size);
+int newStudent(student *p[], int size){
+    student *t = (student *)malloc(sizeof(student));
+    scanf("%s %s %s %d %d", t->name, t->id, t->phone, &t->seat, &t->paid );
+    scanf("%s %s %s %d %d", t->name, t->id, t->phone, &t->seat, &t->paid );
+    scanf("%s %s %s %d %d", t->name, t->id, t->phone, &t->seat, &t->paid );
+    scanf("%s %s %s %d %d", t->name, t->id, t->phone, &t->seat, &t->paid );
+}
 void viewStudent(student *p[], int size){
     printf("\n>> View all students\n");
     printf(">>  #  Name         StudentID   Phone       Seat Paid\n");
@@ -26,6 +30,7 @@ void viewStudent(student *p[], int size){
     }
     printf("\n>> %d students are in the list", size);
 }
+
 void updateStudent(student *p[], int size);
 int deleteStudent(student *p[], int size);
 void searchStudent(student *p[], int size);
