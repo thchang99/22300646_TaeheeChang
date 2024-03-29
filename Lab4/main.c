@@ -12,7 +12,8 @@
 
 int main(){
     student *p[SIZE];
-
-
+    int size;
+    size = loadfile(p);
+    viewStudent(p, size);
     return 0;
 }
