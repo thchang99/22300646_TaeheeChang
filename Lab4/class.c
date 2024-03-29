@@ -1,5 +1,8 @@
 #include "student.h"
 
+
+char payment[2][20] = {"No", "Yes"};
+
 int loadfile(student *p[]){
     FILE *fp;
     fp = fopen("students.txt", "r");
@@ -16,9 +19,12 @@ int loadfile(student *p[]){
 int menu(student *p[]);
 int newStudent(student *p[], int size);
 void viewStudent(student *p[], int size){
+    printf("\n>> View all students\n");
+    printf(">>  #  Name         StudentID   Phone       Seat Paid\n");
     for(int i = 0; i < size; i++){
-        printf("%s %s %s %d %d\n", p[i]->name, p[i]->id, p[i]->phone, p[i]->seat, p[i]->paid);
+        printf(">> [%d] %-12s %-11s %-11s %-4d %s\n", i+1, p[i]->name, p[i]->id, p[i]->phone, p[i]->seat, payment[p[i]->paid]);
     }
+    printf("\n>> %d students are in the list", size);
 }
 void updateStudent(student *p[], int size);
 int deleteStudent(student *p[], int size);
