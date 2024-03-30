@@ -21,13 +21,15 @@ int newStudent(student *p[], int size){
     printf("Name : ");
     scanf("%s", t->name);
     printf("Student ID : ");
-    scanf("%s", t->name);
+    scanf("%s", t->id);
     printf("Phone number : ");
-    scanf("%s", t->name);
+    scanf("%s", t->phone);
     printf("Seat number : ");
-    scanf("%s", &t->seat);
+    scanf("%d", &t->seat);
     printf("Paid (0:NO, 1:YES): ");
-    scanf("%s", &t->paid);
+    scanf("%d", &t->paid);
+    p[size] = t;
+    return ++size;
 }
 void viewStudent(student *p[], int size){
     printf("\n>> View all students\n");
