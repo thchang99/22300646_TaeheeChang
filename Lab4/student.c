@@ -77,6 +77,50 @@ void updateStudent(student *p[], int size){
     return;
     
 }
-int deleteStudent(student *p[], int size);
-void searchStudent(student *p[], int size);
-void save(student *p[], int size);
+int deleteStudent(student *p[], int size){
+    int num;
+    student * t;
+    int noyes;
+    printf("\n>> Delete a student's information\n");
+    printf(">> Enter student's index number : ");
+    scanf("%d", &num);
+    if(num < 1 || num > size){
+        printf(">> Index DNE, exiting to menu.\n");
+        return size;
+    }
+    t = p[num-1];
+    printf("\n>> Selected Student\n");
+    printf(">>  #  Name         StudentID   Phone       Seat Paid\n");
+    printf(">> [%d] %-12s %-11s %-11s %-4d %s\n", num, t->name, t->id, t->phone, t->seat, payment[t->paid]);
+    printf("\n>> Continue? (0:NO, 1:YES): ");
+    scanf("%d", &noyes);
+    if(noyes == 0){
+        printf("\n>> Canceled\n");
+        return size;
+    }
+    for(int i = num-1; i < size; i++){
+            p[i] = p[i+1];
+    }
+    free(t);
+    printf("\n>> Succesfully deleted\n");
+    return --size;
+}
+void searchStudent(student *p[], int size){
+    char name[20];
+    printf("\n>> Search for a Student\n");
+    printf(">> Enter Name : ");
+    scanf("%s", name);
+    printf(">>  #  Name         StudentID   Phone       Seat Paid\n");
+    for(int i = 0; i < size; i++){
+        if(strstr(p[i]->name,name))
+            printf(">> [%d] %-12s %-11s %-11s %-4d %s\n", i+1, p[i]->name, p[i]->id, p[i]->phone, p[i]->seat, payment[p[i]->paid]);
+    }
+}
+void save(student *p[], int size){
+    FILE * save;
+    save = fopen("students.txt", "w");
+    for(int i = 0; i < size; i++){
+        fprintf(save, "%s %s %s %d %d\n", p[i]->name, p[i]->id, p[i]->phone, p[i]->seat, p[i]->paid );
+    }
+
+}
