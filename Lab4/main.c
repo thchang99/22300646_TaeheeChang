@@ -21,7 +21,7 @@ int main(){
     menu();
     printf("\n>> Enter number : ");
     scanf("%d", &input);
-    printf("%d", input);
+
 
     switch(input){
         case 1:
@@ -41,15 +41,18 @@ int main(){
             break;
         case 6: 
             seatStatus(p, size);
+            break;
         case 7:
             unpaid(p, size);
+            break;
         case 8:
             save(p, size);
+            break;
         default:
             break;
     }
 
     }while(input != 0 );
-
+    printf("\n>> Exiting Program..");
     return 0;
 }

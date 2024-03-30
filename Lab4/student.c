@@ -46,6 +46,8 @@ int newStudent(student *p[], int size){
     printf(">> Paid (0:NO, 1:YES): ");
     scanf("%d", &t->paid);
     p[size] = t;
+
+    printf("\n>> Succesfully added new student\n");
     return ++size;
 }
 void viewStudent(student *p[], int size){
@@ -139,6 +141,7 @@ void save(student *p[], int size){
     for(int i = 0; i < size; i++){
         fprintf(save, "%s %s %s %d %d\n", p[i]->name, p[i]->id, p[i]->phone, p[i]->seat, p[i]->paid );
     }
+    printf(">> Succesfully saved data to student.txt");
     fclose(save);
 
 }
