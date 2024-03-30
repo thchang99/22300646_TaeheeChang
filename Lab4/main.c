@@ -16,14 +16,19 @@ int main(){
     int input;
     size = loadfile(p);
 
+    printf(">> Handong Live Ticketing Assistant");
     do{
-    input = menu();
+    menu();
+    printf("\n>> Enter number : ");
+    scanf("%d", &input);
+    printf("%d", input);
+
     switch(input){
         case 1:
             viewStudent(p, size);
             break;
         case 2:
-            newStudent(p, size);
+            size = newStudent(p, size);
             break;
         case 3:
             searchStudent(p, size);

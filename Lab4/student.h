@@ -16,7 +16,7 @@ typedef struct{
 }student;
 
 int loadfile(student *p[]); //returns size read;
-int menu();
+void menu();
 int newStudent(student *p[], int size);
 void viewStudent(student *p[], int size);
 void updateStudent(student *p[], int size);

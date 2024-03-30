@@ -15,22 +15,21 @@ int loadfile(student *p[]){
     }
     return no;
 } //returns size read;
-int menu(){
-    char dummy[20];
-    int input;
-    printf("\n>> Press Enter to view Menu");
-    fgets(dummy , 20, stdin);
+void menu(){
+    char dummy;
 
-    printf("\n>> Menu\n\n");
+    printf("\n\n>> Press Enter to view Menu\n");
+    fflush(stdin);
+    while (getchar() != '\n');
+
+    printf("\n>> Menu\n");
 
     for(int i = 0; i < 8; i++){
         printf(">> [%d] %s\n", i+1, menus[i]);
     }
-
     printf(">> [0] Exit\n");
-    printf("\n>> Enter number : ");
-    scanf("%d", &input);
-    return input;
+
+    return;
 }
 
 int newStudent(student *p[], int size){
@@ -145,7 +144,7 @@ void save(student *p[], int size){
 }
 
 void unpaid(student *p[], int size){
-    printf("\n>> Show list of students that have not paid");
+    printf("\n>> Show list of students that have not paid\n");
     printf(">>  #  Name         StudentID   Phone       Seat Paid\n");
     for(int i = 0; i < size; i++){
         if(p[i]->paid == 0)
