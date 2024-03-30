@@ -1,5 +1,5 @@
 CC = gcc
-SRC = main.c class.c
+SRC = main.c student.c
 OBJ = $(SRC:.c=.o)
 EXEC = main
 

@@ -15,5 +15,7 @@ int main(){
     int size;
     size = loadfile(p);
     viewStudent(p, size);
+    size = newStudent(p,size);
+    viewStudent(p, size);
     return 0;
 }
