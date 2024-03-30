@@ -29,5 +29,10 @@ The Billing menu allows users to manage the billing status of student profiles. 
 Save
 The Save menu enables users to save any modifications or updates made to student profiles back to the system's database. After making changes to student information through menus such as Add New, Edit, or Delete, users can use the Save option to ensure that the changes are permanently stored and reflected in the system's records. 
 
+
+Screenshots
+1_boot: shows how to boot the program to get started
+The rest of the screenshots show an example of correctly executed menu programs.
+
 Final Impressions
 Developing HanLTA was a fulfilling experience. Addressing a real need at Handong Global University, I enjoyed creating a tool that simplifies ticket booking. Drawing from personal experiences, I enhanced programming skills and gained valuable insights. Excited to refine HanLTA further, I'm proud of its progress.
