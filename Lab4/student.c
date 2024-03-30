@@ -122,5 +122,28 @@ void save(student *p[], int size){
     for(int i = 0; i < size; i++){
         fprintf(save, "%s %s %s %d %d\n", p[i]->name, p[i]->id, p[i]->phone, p[i]->seat, p[i]->paid );
     }
+    fclose(save);
 
+}
+
+void unpaid(student *p[], int size);
+void seatStatus(student *p[], int size){
+    int seats[SIZE] = {0};
+    for(int i = 0; i < size; i++){
+        seats[p[i]->seat] += 1;
+    }
+
+    for(int i = 1; i <= SIZE / 10; i++){
+        for(int j = 0; j < 10; j++){
+            printf("%2d [%c]", i*j, (seats[i*j] > 0) ? '*' : ' ');
+        }
+        printf("\n");
+    }
+
+    printf(">> Seats with conflicts : ");
+    for(int i = 0; i < SIZE; i++){
+        if(seats[i] > 1){
+            printf(" [i]");
+        }
+    }
 }

@@ -23,5 +23,5 @@ void updateStudent(student *p[], int size);
 int deleteStudent(student *p[], int size);
 void searchStudent(student *p[], int size);
 void save(student *p[], int size);
-
+void seatStatus(student *p[], int size);
 #endif
