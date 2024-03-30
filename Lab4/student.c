@@ -1,6 +1,6 @@
 #include "student.h"
 char payment[2][20] = {"No", "Yes"};
-
+char menus[8][20] = {"View List", "Add New", "Find", "Edit", "Delete", "Seats", "Billing", "Save"};
 int loadfile(student *p[]){
     FILE *fp;
     fp = fopen("students.txt", "r");
@@ -8,13 +8,31 @@ int loadfile(student *p[]){
 
     while(!feof(fp)){
         student *t = (student *)malloc(sizeof(student));
-        fscanf(fp, "%s %s %s %d %d", t->name, t->id, t->phone, &t->seat, &t->paid );
+        if(fscanf(fp, "%s %s %s %d %d", t->name, t->id, t->phone, &t->seat, &t->paid) != 5)
+            break;
         p[no] = t;
         no++;
     }
     return no;
 } //returns size read;
-int menu(student *p[]);
+int menu(){
+    char dummy[20];
+    int input;
+    printf("\n>> Press Enter to view Menu");
+    fgets(dummy , 20, stdin);
+
+    printf("\n>> Menu\n\n");
+
+    for(int i = 0; i < 8; i++){
+        printf(">> [%d] %s\n", i+1, menus[i]);
+    }
+
+    printf(">> [0] Exit\n");
+    printf("\n>> Enter number : ");
+    scanf("%d", &input);
+    return input;
+}
+
 int newStudent(student *p[], int size){
     printf("\n>> Enter new student info\n");
     student *t = (student *)malloc(sizeof(student));
@@ -126,24 +144,34 @@ void save(student *p[], int size){
 
 }
 
-void unpaid(student *p[], int size);
+void unpaid(student *p[], int size){
+    printf("\n>> Show list of students that have not paid");
+    printf(">>  #  Name         StudentID   Phone       Seat Paid\n");
+    for(int i = 0; i < size; i++){
+        if(p[i]->paid == 0)
+            printf(">> [%d] %-12s %-11s %-11s %-4d %s\n", i+1, p[i]->name, p[i]->id, p[i]->phone, p[i]->seat, payment[p[i]->paid]);
+    }
+}
 void seatStatus(student *p[], int size){
     int seats[SIZE] = {0};
+
+    printf("\n>>Show status on seats\n");
     for(int i = 0; i < size; i++){
         seats[p[i]->seat] += 1;
     }
 
-    for(int i = 1; i <= SIZE / 10; i++){
+    for(int i = 0; i < SIZE / 10; i++){
+        printf(">> ");
         for(int j = 0; j < 10; j++){
-            printf("%2d [%c]", i*j, (seats[i*j] > 0) ? '*' : ' ');
+            printf("%2d [%c]", i*10+j, (seats[i*10 + j] > 0) ? '*' : ' ');
         }
         printf("\n");
     }
 
-    printf(">> Seats with conflicts : ");
+    printf("\n>> Seats with conflicts : ");
     for(int i = 0; i < SIZE; i++){
         if(seats[i] > 1){
-            printf(" [i]");
+            printf(" [%d]", i);
         }
     }
 }

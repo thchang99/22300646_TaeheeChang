@@ -13,9 +13,38 @@
 int main(){
     student *p[SIZE];
     int size;
+    int input;
     size = loadfile(p);
-    viewStudent(p, size);
-    size = newStudent(p, size);
-    save(p, size);
+
+    do{
+    input = menu();
+    switch(input){
+        case 1:
+            viewStudent(p, size);
+            break;
+        case 2:
+            newStudent(p, size);
+            break;
+        case 3:
+            searchStudent(p, size);
+            break;
+        case 4:
+            updateStudent(p, size);
+            break;
+        case 5:
+            size = deleteStudent(p, size);
+            break;
+        case 6: 
+            seatStatus(p, size);
+        case 7:
+            unpaid(p, size);
+        case 8:
+            save(p, size);
+        default:
+            break;
+    }
+
+    }while(input != 0 );
+
     return 0;
 }
